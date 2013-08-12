@@ -2,3 +2,5 @@ name: SuccessTracker
 description: A sample application
 dependencies:
   browser: any
+dev_dependencies:
+  unittest: any
