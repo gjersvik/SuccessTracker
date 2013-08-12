@@ -1,0 +1,4 @@
+name: SuccessTracker
+description: A sample application
+dependencies:
+  browser: any
