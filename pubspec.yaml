@@ -1,4 +1,4 @@
-name: SuccessTracker
+name: success_tracker
 description: A sample application
 dependencies:
   browser: any
