@@ -219,3 +219,8 @@ pip-log.txt
 #############
 pubspec.lock
 packages
+
+#############
+## Project Spesific
+#############
+config.dart
