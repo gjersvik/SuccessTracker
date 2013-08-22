@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:html';
+
 
 import "package:google_oauth2_client/google_oauth2_browser.dart";
 
@@ -12,5 +14,11 @@ main(){
   print('Try to log inn');
   auth.login(immediate:true).then((_){
     print('Success');
+  }).catchError((_) => true, test:(e) => e is AuthException);
+  
+  query("#login").onClick.listen((_){
+    auth.login().then((_){
+      print('Success');
+    }).catchError((_) => true, test:(e) => e is AuthException);
   });
 }
