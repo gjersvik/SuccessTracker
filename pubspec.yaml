@@ -2,6 +2,7 @@ name: success_tracker
 description: A sample application
 dependencies:
   browser: any
+  crypto: any
   google_drive_v2_api: any
 dev_dependencies:
   unittest: any
