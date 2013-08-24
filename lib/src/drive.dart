@@ -7,12 +7,33 @@ class Drive extends Store{
   Drive(GoogleOAuth2 oauth2){
     _drive = new driveclient.Drive(oauth2);
     _drive.makeAuthRequests = true;
-    //_drive.files.list(q: "'appdata' in parents");
   }
   
   Future<Entity> load(String name){
-    
+    return _getMetaData().then((meta){
+      if(!meta.containsKey(name)){
+        throw new KeyNotFound();
+      }
+      Token token = _drive.auth.token;
+      
+      return HttpRequest.request(meta[name].downloadUrl, 
+          withCredentials: false , 
+          responseType: 'arraybuffer', 
+          requestHeaders: {'Authorization': '${token.type} ${token.data}'} ).then((HttpRequest req){
+            ByteBuffer buffer;
+            if(req.response is ByteBuffer){
+              buffer = req.response;
+            }else if(req.response is TypedData){
+              buffer = (req.response as TypedData).buffer;
+            }else{
+              throw "Got an unexpected type: ${req.response.runtimeType}";
+            }            
+            
+            return new Entity(name, DateTime.parse(meta[name].modifiedDate), new Uint16List.view(buffer));
+          });
+    });
   }
+  
   Future<Entity> save(Entity entity){
     drive.File file = new drive.File.fromJson({
       'title': entity.name,
@@ -29,5 +50,13 @@ class Drive extends Store{
   }
   Stream<Entity> get onChange {
     
+  }
+  
+  Future<Map<String,drive.File>> _getMetaData(){
+    return _drive.files.list(q: "'appdata' in parents").then((drive.FileList filelist){
+      var meta = {};
+      filelist.items.forEach((drive.File file) => meta[file.title] = file);
+      return meta;
+    });
   }
 }

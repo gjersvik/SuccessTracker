@@ -27,6 +27,12 @@ main(){
       print(e.name);
       print(e.timestamp);
       print(e.data.lengthInBytes);
+    }).then((_){
+      drive.load('test').then((Entity e){
+        print(e.name);
+        print(e.timestamp);
+        print(e.data.lengthInBytes);
+      });
     });
     
   }
