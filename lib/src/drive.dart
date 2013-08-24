@@ -40,7 +40,7 @@ class Drive extends Store{
       'mimeType': 'application/octet-stream',
       'parents': [{'id': 'appdata'}]
     });
-    String base64 = CryptoUtils.bytesToBase64(entity.data.toList());
+    String base64 = CryptoUtils.bytesToBase64(new Uint8List.view(entity.data.buffer).toList());
     
     return _drive.files.insert(file,content:base64).then((drive.File file){
       Entity e = new Entity(file.title,DateTime.parse(file.modifiedDate),entity.data);
