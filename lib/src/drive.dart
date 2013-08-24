@@ -3,20 +3,21 @@ part of success;
 class Drive extends Store{
   
   driveclient.Drive _drive;
+  DriveMeta _meta;
   
   Drive(GoogleOAuth2 oauth2){
     _drive = new driveclient.Drive(oauth2);
     _drive.makeAuthRequests = true;
+    
+    _meta = new DriveMeta(_drive);
   }
   
   Future<Entity> load(String name){
-    return _getMetaData().then((meta){
-      if(!meta.containsKey(name)){
-        throw new KeyNotFound();
-      }
+    return _meta.getMeta(name).then((drive.File file){
+
       Token token = _drive.auth.token;
       
-      return HttpRequest.request(meta[name].downloadUrl, 
+      return HttpRequest.request(file.downloadUrl, 
           withCredentials: false , 
           responseType: 'arraybuffer', 
           requestHeaders: {'Authorization': '${token.type} ${token.data}'} ).then((HttpRequest req){
@@ -29,33 +30,20 @@ class Drive extends Store{
               throw "Got an unexpected type: ${req.response.runtimeType}";
             }            
             
-            return new Entity(name, DateTime.parse(meta[name].modifiedDate), new Uint16List.view(buffer));
+            return new Entity(name, DateTime.parse(file.modifiedDate), new Uint16List.view(buffer));
           });
     });
   }
   
   Future<Entity> save(Entity entity){
-    return _getMetaData().then((meta){
-      if(meta.containsKey(entity.name)){
-        return _update(meta[entity.name],entity.data);
-      }else{
-        return _insert(entity.name,entity.data);
-      }
-    });
-  }
-  Stream<Entity> get onChange {
-    
+    return _meta.getMeta(entity.name)
+        .then((drive.File file) => _update(file,entity.data))
+        .catchError((_) => _insert(entity.name,entity.data), test: (e) => e is KeyNotFound);
   }
   
-  Future<Map<String,drive.File>> _getMetaData(){
-    return _drive.files.list(q: "'appdata' in parents").then((drive.FileList filelist){
-      var meta = {};
-      filelist.items.forEach((drive.File file) => meta[file.title] = file);
-      return meta;
-    });
-  }
+  Stream<String> get onChange => _meta.onChange;
   
-  _update(drive.File file, data){
+  Future<Entity> _update(drive.File file, data){
     String base64 = CryptoUtils.bytesToBase64(new Uint8List.view(data.buffer).toList());
     
     return _drive.files.update(file, file.id, content:base64).then((drive.File file){

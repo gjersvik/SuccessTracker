@@ -14,3 +14,4 @@ part 'src/entity.dart';
 part 'src/store.dart';
 
 part 'src/drive.dart';
+part 'src/drivemeta.dart';
