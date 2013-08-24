@@ -35,17 +35,12 @@ class Drive extends Store{
   }
   
   Future<Entity> save(Entity entity){
-    drive.File file = new drive.File.fromJson({
-      'title': entity.name,
-      'mimeType': 'application/octet-stream',
-      'parents': [{'id': 'appdata'}]
-    });
-    String base64 = CryptoUtils.bytesToBase64(new Uint8List.view(entity.data.buffer).toList());
-    
-    return _drive.files.insert(file,content:base64).then((drive.File file){
-      Entity e = new Entity(file.title,DateTime.parse(file.modifiedDate),entity.data);
-      
-      return e;
+    return _getMetaData().then((meta){
+      if(meta.containsKey(entity.name)){
+        return _update(meta[entity.name],entity.data);
+      }else{
+        return _insert(entity.name,entity.data);
+      }
     });
   }
   Stream<Entity> get onChange {
@@ -57,6 +52,31 @@ class Drive extends Store{
       var meta = {};
       filelist.items.forEach((drive.File file) => meta[file.title] = file);
       return meta;
+    });
+  }
+  
+  _update(drive.File file, data){
+    String base64 = CryptoUtils.bytesToBase64(new Uint8List.view(data.buffer).toList());
+    
+    return _drive.files.update(file, file.id, content:base64).then((drive.File file){
+      Entity e = new Entity(file.title,DateTime.parse(file.modifiedDate),data);
+      
+      return e;
+    });
+  }
+  
+  _insert(name,data){
+    drive.File file = new drive.File.fromJson({
+      'title': name,
+      'mimeType': 'application/octet-stream',
+      'parents': [{'id': 'appdata'}]
+    });
+    String base64 = CryptoUtils.bytesToBase64(new Uint8List.view(data.buffer).toList());
+    
+    return _drive.files.insert(file,content:base64).then((drive.File file){
+      Entity e = new Entity(file.title,DateTime.parse(file.modifiedDate),data);
+      
+      return e;
     });
   }
 }
