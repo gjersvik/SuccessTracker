@@ -5,17 +5,21 @@ import 'dart:html';
 
 
 import "package:google_oauth2_client/google_oauth2_browser.dart";
+import "package:intl/intl.dart";
 
 import "package:success_tracker/success.dart";
 
 import '../config.dart';
 
 part 'src/login.dart';
+part 'src/datepicker.dart';
 
 const Config config = const Config();
 
 main(){
   var login = new Login();
+  var date = new DatePicker();
+  date.update(new DateTime.now());
   var auth;
   
   online(_){

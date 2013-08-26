@@ -4,5 +4,6 @@ dependencies:
   browser: any
   crypto: any
   google_drive_v2_api: any
+  intl: any
 dev_dependencies:
   unittest: any
