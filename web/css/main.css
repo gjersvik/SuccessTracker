@@ -1,83 +1,92 @@
-html{
-  height:100%;
-}
-body{
-  height:100%;
-  margin: 0;
+.vbox, .hbox{
   display : flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-start; 
   overflow:hidden;
 }
 
-footer, header{
+.vbox{
+  flex-direction: column;
+  height:100%;
+}
+
+.vbox > *{
+  min-height: auto;
+  height:100%;
+}
+
+.hbox{
+  flex-direction: row;
+  width:100%;
+}
+
+.hbox > *{
+  min-width: auto;
+  width:100%;
+}
+
+.line{
+  text-align: center;
+  line-height: 1.5em;
+  min-height: 1.5em;
+  height: 1.5em;
+  font-size: 2em;
+}
+
+.black{
   color: white;
   background-color: black;
-  text-align: center;
+}
+
+.gray{
+  background-color: lightgray;
+}
+
+button{
+  font-size: 1em;
+}
+
+html{
+  height:100%;
+}
+
+body{
+  margin: 0;
 }
 
 header{
   font-size: 3em;
-  line-height: 1.2em;
 }
 
 footer{
   font-size: .75em;
-  line-height: 1.2em;
-  
-}
-
-button{
-font-size: 1em;
 }
 
 #datepic{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  overflow:hidden;
   font-size: 2em;
-  min-height: 1.5em;
-  line-height: 1.5em;
-  background-color: lightgray;
 }
 #datepic > button{
-  min-width: auto;
   width: 4em;
 }
 #datepic > span{
-  min-width: auto;
-  width: 100%;
-  text-align: center;
 }
 
-#success{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-#success > .row{
+#success > .hbox{
   flex: 1;
-  display: flex;
-  flex-direction: row;
-  min-height: 1.5em;
-  height: 100%;
 }
 
-#success > .row.head{
+#success > .hbox.head{
   flex: 0;
   height: 1em;
   text-align: center;
 }
 
-#success > .row > div{
+#success > .hbox > div{
   flex: 1;
   border: 0.1em solid black;
   width: 100%;
 }
 
-#success > .row > div.empty{
+#success > .hbox > div.empty{
   border: none;
   margin: 0.1em;
 }
@@ -87,24 +96,13 @@ font-size: 1em;
 }
 
 #buttons{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  overflow:hidden;
   font-size: 2em;
-  min-height: 1.5em;
-  line-height: 1.5em;
-  background-color: lightgray;
 }
 
 #buttons .inc{
   flex: 2;
-  min-width: auto;
-  width: 100%;
-  font-size: 1em;
 }
+
 #buttons .dec{
   flex: 1;
-  min-width: auto;
-  width: 100%;
 }
