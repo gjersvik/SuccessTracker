@@ -6,26 +6,105 @@ body{
   margin: 0;
   display : flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   overflow:hidden;
 }
 
 footer, header{
   color: white;
   background-color: black;
-  font-size: 2em;
-  line-height: 1.5em;
   text-align: center;
 }
 
 header{
-  font-size: 2em;
-  min-height: 1.5em;
-  line-height: 1.5em;
+  font-size: 3em;
+  line-height: 1.2em;
 }
 
 footer{
   font-size: .75em;
-  height: 1.2em;
   line-height: 1.2em;
+  
+}
+
+button{
+font-size: 1em;
+}
+
+#datepic{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow:hidden;
+  font-size: 2em;
+  min-height: 1.5em;
+  line-height: 1.5em;
+  background-color: lightgray;
+}
+#datepic > button{
+  min-width: auto;
+  width: 4em;
+}
+#datepic > span{
+  min-width: auto;
+  width: 100%;
+  text-align: center;
+}
+
+#success{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#success > .row{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  min-height: 1.5em;
+  height: 100%;
+}
+
+#success > .row.head{
+  flex: 0;
+  height: 1em;
+  text-align: center;
+}
+
+#success > .row > div{
+  flex: 1;
+  border: 0.1em solid black;
+  width: 100%;
+}
+
+#success > .row > div.empty{
+  border: none;
+  margin: 0.1em;
+}
+
+#success > .big{
+  flex: 2;
+}
+
+#buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow:hidden;
+  font-size: 2em;
+  min-height: 1.5em;
+  line-height: 1.5em;
+  background-color: lightgray;
+}
+
+#buttons .inc{
+  flex: 2;
+  min-width: auto;
+  width: 100%;
+  font-size: 1em;
+}
+#buttons .dec{
+  flex: 1;
+  min-width: auto;
+  width: 100%;
 }
