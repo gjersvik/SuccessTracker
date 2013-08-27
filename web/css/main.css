@@ -53,11 +53,11 @@ body{
   margin: 0;
 }
 
-header{
+header.line{
   font-size: 3em;
 }
 
-footer{
+footer.line{
   font-size: .75em;
 }
 
@@ -74,25 +74,33 @@ footer{
   flex: 1;
 }
 
-#success > .hbox.head{
+#success .hbox.head{
   flex: 0;
+  min-height: 1.5em;
   height: 1em;
   text-align: center;
+  cursor: default;
 }
 
-#success > .hbox > div{
+#success .day{
   flex: 1;
   border: 0.1em solid black;
-  width: 100%;
+  cursor: pointer;
 }
 
-#success > .hbox > div.empty{
-  border: none;
+#success .empty{
+  flex: 1;
   margin: 0.1em;
+  cursor: default;
 }
 
-#success > .big{
-  flex: 2;
+#success .hbox.head > div{
+  cursor: default;
+}
+
+#success div.big{
+  flex: 1.5;
+  font-size: 1.5em;
 }
 
 #buttons{

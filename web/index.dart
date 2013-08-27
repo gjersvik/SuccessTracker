@@ -13,12 +13,16 @@ import '../config.dart';
 
 part 'src/login.dart';
 part 'src/datepicker.dart';
+part 'src/calendar.dart';
 
 const Config config = const Config();
 
 main(){
   var login = new Login();
   var date = new DatePicker();
+  var cal = new Calendar();
+  
+  date.onDateChange.listen(cal.updateDate);
   date.update(new DateTime.now());
   var auth;
   
