@@ -23,6 +23,7 @@ main(){
   var cal = new Calendar();
   
   date.onDateChange.listen(cal.updateDate);
+  cal.onDateChange.listen(date.update);
   date.update(new DateTime.now());
   var auth;
   

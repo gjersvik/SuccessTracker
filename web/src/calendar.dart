@@ -3,9 +3,15 @@ part of success_tacker;
 class Calendar{
   Element _elem;
   DateTime _date;
+  StreamController<DateTime> _sink = new StreamController.broadcast();
+  
+  Stream<DateTime> onDateChange;
   
   Calendar([selector = "#success"]){
+    onDateChange = _sink.stream;
+    
     _elem = query(selector);
+    _elem.onClick.listen(_onclick);
   }
   
   updateDate(DateTime day){
@@ -59,5 +65,17 @@ class Calendar{
     }
     sb.write('</div>');
     return sb.toString();
+  }
+  
+  _onclick(MouseEvent e){
+    if(e.button != 0){
+      return;
+    }
+    Element elem = e.target;
+    if(elem.id != ''){
+      _sink.add(new DateTime(_date.year, _date.month, int.parse(elem.id)));
+      e.stopPropagation();
+      e.preventDefault();
+    }
   }
 }
