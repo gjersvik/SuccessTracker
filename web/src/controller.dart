@@ -6,6 +6,7 @@ class Controller{
   
   Config _conf;
   GoogleOAuth2 _auth;
+  var _buttons = new Buttons();
   var _cal = new Calendar();
   var _date = new DatePicker();
   Drive _drive;
@@ -20,11 +21,14 @@ class Controller{
     _date.onDateChange.listen(dateChange);
     _cal.onDateChange.listen(dateChange);
     _login.onActivate.listen((_)=>_auth.login());
+    _buttons.onInc.listen(inc);
+    _buttons.onDec.listen(dec);
     
     dateChange(new DateTime.now());
   }
   
   dateChange(DateTime date){
+    this.date = date;
     _cal.updateDate(date);
     _date.update(date);
   }
@@ -35,11 +39,11 @@ class Controller{
     _drive = new Drive(_auth);
   }
   
-  inc(){
+  inc([_]){
     print('Increase: $date');
   }
   
-  dec(){
+  dec([_]){
     print('Decrease: $date');
   }
 }

@@ -11,6 +11,7 @@ import "package:success_tracker/success.dart";
 
 import '../config.dart';
 
+part 'src/buttons.dart';
 part 'src/calendar.dart';
 part 'src/controller.dart';
 part 'src/datepicker.dart';
