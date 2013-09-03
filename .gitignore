@@ -219,6 +219,7 @@ pip-log.txt
 #############
 pubspec.lock
 packages
+deploy
 
 #############
 ## Project Spesific
