@@ -44,7 +44,7 @@ class Controller{
     online = true;
     _login.hide();  
     _drive = new Drive(_auth);
-    _model.addStore(_drive);
+    _model.setStore(_drive);
   }
   
   inc([_]){
