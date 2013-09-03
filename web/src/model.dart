@@ -18,9 +18,11 @@ class Model{
     _store.load(new DateTime.now().year.toString())
       .then((e){
         _entery = e;
-      }).catchError((_){
+      })
+      .catchError((_){
         _entery = _newEntity(new DateTime.now().year);
-      }, test: (e) => e is KeyNotFound);
+      }, test: (e) => e is KeyNotFound)
+      .whenComplete(()=>_sink.add(null));
   }
   
   int getDay(DateTime date){

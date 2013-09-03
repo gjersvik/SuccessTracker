@@ -25,6 +25,8 @@ class Controller{
     _buttons.onInc.listen(inc);
     _buttons.onDec.listen(dec);
     
+    _model.onNewData.listen(dataChange);
+    
     dateChange(new DateTime.now());
   }
   
@@ -32,6 +34,10 @@ class Controller{
     this.date = date;
     _cal.updateDate(date);
     _date.update(date);
+  }
+  
+  dataChange([_]){
+    _cal.updateData(_model.getDay);
   }
   
   goOnline([_]){

@@ -86,6 +86,7 @@ footer.line{
   flex: 1;
   border: 0.1em solid black;
   cursor: pointer;
+  word-break: break-all;
 }
 
 #success .empty{
