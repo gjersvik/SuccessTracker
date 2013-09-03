@@ -29,7 +29,7 @@ class Drive extends Store{
             }else{
               throw "Got an unexpected type: ${req.response.runtimeType}";
             }            
-            
+            print(file.modifiedDate);
             return new Entity(name, DateTime.parse(file.modifiedDate), new Uint16List.view(buffer));
           });
     });

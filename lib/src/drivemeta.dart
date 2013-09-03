@@ -4,7 +4,8 @@ class DriveMeta{
   Duration minAge = new Duration(seconds: 10);
   Duration syncInerval = new Duration(minutes: 1);
   
-  DateTime lastSync = new DateTime(1900);
+  DateTime lastFile = new DateTime.utc(1900);
+  DateTime lastSync = new DateTime.utc(1900);
   
   driveclient.Drive _drive;
   bool _syncing = false;
@@ -39,15 +40,20 @@ class DriveMeta{
     }
     _syncing = true;
     
-    var date = lastSync.toString().replaceAll(' ', 'T');
-    
-    return _drive.files.list(q: "'appdata' in parents and modifiedDate > '$date'").then((drive.FileList filelist){
+    return _drive.files.list(q: "'appdata' in parents").then((drive.FileList filelist){
       filelist.items.forEach((drive.File file){
-        _meta[file.title] = file;
-        _stream.add(file.title);
+        var templast = lastFile;
+        var filetime = DateTime.parse(file.modifiedDate);
+        if(filetime.isAfter(templast)){
+          _meta[file.title] = file;
+          _stream.add(file.title);
+          if(filetime.isAfter(lastFile)){
+            lastFile = filetime;
+          }
+        }
       });
       
-      lastSync = new DateTime.now();
+      lastSync = new DateTime.now().toUtc();
       _syncing = false;
       _backlog.forEach((c)=> c.complete(null));
       _backlog.clear();

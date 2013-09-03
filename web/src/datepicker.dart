@@ -11,7 +11,7 @@ class DatePicker{
   DatePicker([selector = "#datepic"]){
     onDateChange = _sink.stream;
     _elem = query(selector);
-    _datetext = _elem.query("span");
+    _datetext = _elem.query("span.datetext");
     _elem.query(".mounth-inc").onClick.listen(_nextMonth);
     _elem.query(".mounth-dec").onClick.listen(_prevMonth);
     _elem.query(".day-inc").onClick.listen(_nextDay);
