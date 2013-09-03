@@ -121,11 +121,11 @@ footer.line{
   header.line{
     font-size: 2em;
   }
-  #datepic{
+  #datepic.line{
     height: 4.5em;
     font-size: 1.5em;
   }
-  #buttons{
+  #buttons.line{
     font-size: 1.5em;
     height: 4em;
   }
