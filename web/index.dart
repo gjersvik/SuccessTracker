@@ -16,6 +16,7 @@ part 'src/calendar.dart';
 part 'src/controller.dart';
 part 'src/datepicker.dart';
 part 'src/login.dart';
+part 'src/model.dart';
 
 main(){
   var controll = new Controller(const Config());
