@@ -11,6 +11,7 @@ class Controller{
   var _date = new DatePicker();
   Drive _drive;
   var _login = new Login();
+  var _model = new Model();
   
   Controller(this._conf);
   
@@ -37,13 +38,14 @@ class Controller{
     online = true;
     _login.hide();  
     _drive = new Drive(_auth);
+    _model.addStore(_drive);
   }
   
   inc([_]){
-    print('Increase: $date');
+    _model.inc(date);
   }
   
   dec([_]){
-    print('Decrease: $date');
+    _model.dec(date);
   }
 }

@@ -18,7 +18,9 @@ class Model{
     _store.load(new DateTime.now().year.toString())
       .then((e){
         _entery = e;
-      });
+      }).catchError((_){
+        _entery = _newEntity(new DateTime.now().year);
+      }, test: (e) => e is KeyNotFound);
   }
   
   int getDay(DateTime date){
@@ -52,5 +54,14 @@ class Model{
       });
   }
   
-  int getIndex(DateTime date) => new DateTime(date.year).difference(date).inDays;
+  int getIndex(DateTime date) => date.difference(new DateTime(date.year)).inDays;
+  
+  Entity _newEntity(int year){
+    var length = 365;
+    if(year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)){
+      length = 366;
+    }
+    
+    return new Entity.create(year.toString(), length);
+  }
 }
