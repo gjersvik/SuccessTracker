@@ -26,25 +26,59 @@ class Calendar{
   }
   
   render(){
-    const day = const Duration(days: 1);
+    const week = const Duration(days: 7);
     var sb = new StringBuffer();
-    sb.write('<div class="hbox head"><div>Monday</div><div>Tuesday</div><div>Wednesday</div><div>Thursday</div><div>Friday</div><div>Saturday</div><div>Sunday</div></div>');
+    sb.write(_weekNames());
+    
     var month = _date.month;
     var date = new DateTime(_date.year,_date.month,1);
     date = date.add(new Duration(days: (date.weekday - 1) * -1));
     while(date.month <= month){
-      sb.write('<div class="hbox">');
-      for(var i = 0; i < 7; i += 1){
-        if(date.month == month){
-          sb.write(_day(date.day, date.isAtSameMomentAs(_date), _getDate(date)));
-        }else{
-          sb.write(_day());
-        }
-        date = date.add(day);
-      }
+      sb.write(_week(date,month));
+      date = date.add(week);
+    }
+    
+    _elem.innerHtml = sb.toString();
+  }
+  
+  String _weekNames(){
+    const days = const ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    var sb = new StringBuffer();
+    sb.write('<div class="hbox head">');
+    
+    for(var i = 0; i < days.length; i += 1 ){
+      sb.write('<div>');
+      sb.write(days[i]);
       sb.write('</div>');
     }
-    _elem.innerHtml = sb.toString();
+    
+    sb.write('</div>');
+    return sb.toString();
+  }
+  
+  _week(DateTime date, int month){
+    var sb = new StringBuffer();
+    var active = _date.isAtSameMomentAs(date);
+    if(active == false){
+      active = _date.isAfter(date) && _date.isBefore(date.add(const Duration(days: 6)));
+    }
+    
+    if(active){
+      sb.write('<div class="hbox active">');
+    }else{
+      sb.write('<div class="hbox">');
+    }
+    
+    for(var i = 0; i < 7; i += 1){
+      if(date.month == month){
+        sb.write(_day(date.day, date.isAtSameMomentAs(_date), _getDate(date)));
+      }else{
+        sb.write(_day());
+      }
+      date = date.add(const Duration(days: 1));
+    }
+    sb.write('</div>');
+    return sb.toString();
   }
   
   String _day([int day = 0, big = false,int succeses = 0]){
@@ -66,8 +100,9 @@ class Calendar{
     }
     sb.write('">');
     if(day != 0){
+      sb.write('<span>');
       sb.write(day);
-      sb.write(': ');
+      sb.write(': </span>');
       if(succeses != 0){
         sb.writeAll(new List.filled(succeses, 'X'));
       }

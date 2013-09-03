@@ -23,8 +23,17 @@ class DatePicker{
     if(!_current.isAtSameMomentAs(day)){
       _current = day;
       _sink.add(_current);
-      _datetext.text = new DateFormat('d. MMMM yyyy').format(_current);
+      _render();
     }
+  }
+  
+  _render(){
+    var sb = new StringBuffer();
+    sb.write('<span>');
+    sb.write(new DateFormat('EEEE').format(_current));
+    sb.write('<br></span>');
+    sb.write(new DateFormat('d. MMMM yyyy').format(_current));
+    _datetext.innerHtml = sb.toString();
   }
   
   _nextDay(_){

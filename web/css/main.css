@@ -67,7 +67,8 @@ footer.line{
 #datepic > button{
   width: 4em;
 }
-#datepic > span{
+.datetext span{
+  display: none;
 }
 
 #success > .hbox{
@@ -114,4 +115,33 @@ footer.line{
 
 #buttons .dec{
   flex: 1;
+}
+
+@media (max-width: 600px) {
+  #datepic{
+    height: 4em;
+  }
+  .datetext span{
+    display: inline;
+  }
+  .mounth-inc{display:none}
+  .mounth-dec{display:none}
+  
+  #success div{
+    display:none;
+  }
+  #success span{
+    display:none;
+  }
+  #success div.active{
+    display:block;
+  }
+  #success div.big{
+    display:block;
+    font-size: 3em;
+    
+  }
+  #success .hbox.active{
+    display:flex;
+  }
 }
