@@ -60,7 +60,7 @@ class Calendar{
     var sb = new StringBuffer();
     var active = _date.isAtSameMomentAs(date);
     if(active == false){
-      active = _date.isAfter(date) && _date.isBefore(date.add(const Duration(days: 6)));
+      active = _date.isAfter(date) && _date.isBefore(date.add(const Duration(days: 7)));
     }
     
     if(active){
