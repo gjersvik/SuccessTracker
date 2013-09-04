@@ -122,15 +122,12 @@ footer.line{
     font-size: 2em;
   }
   #datepic.line{
-    height: 4.5em;
+    min-height: 3em;
     font-size: 1.5em;
   }
   #buttons.line{
     font-size: 1.5em;
-    height: 4em;
-  }
-  #datepic{
-    height: 4em;
+    min-height: 3em;
   }
   .datetext span{
     display: inline;
