@@ -24,7 +24,6 @@ dayTest() => group('Day', (){
   });
   
   test('if .focus is true then .elem has class big',(){
-    var day = new Day();
     day.day = 1;
     expect(day.elem.classes.contains('big'),isFalse);
     day.focus = true;
@@ -32,7 +31,6 @@ dayTest() => group('Day', (){
   });
   
   test('.elem.text starts wit .day and : .',(){
-    var day = new Day();
     day.day = 1;
     expect(day.elem.text,startsWith('1: '));
     day.day = 27;
@@ -40,13 +38,11 @@ dayTest() => group('Day', (){
   });
 
   test('when .day is not 0 class has day',(){
-    var day = new Day();
     day.day = 27;
     expect(day.elem.classes.contains('day'), isTrue);
   });
   
   test('when .day is 0 class has only empty',(){
-    var day = new Day();
     day.day = 27;
     day.focus = true;
     day.day = 0;
@@ -55,7 +51,6 @@ dayTest() => group('Day', (){
   });
   
   test('when .day is 0 class has no text',(){
-    var day = new Day();
     day.day = 27;
     day.focus = true;
     day.day = 0;

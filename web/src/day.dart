@@ -5,7 +5,7 @@ class Day{
   
   int _day = 0;
   bool _focus = false;
-  int successes = 0;
+  String _successes = '';
   
   Day(){
     _setClass();
@@ -35,6 +35,16 @@ class Day{
     _setClass();
   }
   
+  int get successes => _successes.length;
+  set successes(int s){
+    if(_successes.length == s){
+      return;
+    }
+    _successes = new List.filled(s, 'X').join('');
+    _setText();
+  }
+  
+  
   _setClass(){
     elem.classes.toggle('day', _day != 0);
     elem.classes.toggle('empty', _day == 0);
@@ -43,7 +53,7 @@ class Day{
   
   _setText(){
     if(_day != 0){
-      elem.text = '$_day: ';
+      elem.text = '$_day: $_successes';
     }else{
       elem.text = '';
     }
