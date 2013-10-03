@@ -17,6 +17,12 @@ dayTest() => group('Day', (){
     expect(day.focus, isFalse, reason: 'Day.focus is not false');
   });
   
+  test('starts consistend', (){
+    expect(day.elem.classes.contains('empty'), isTrue);
+    expect(day.elem.classes.length, 1);
+    expect(day.elem.text, isEmpty);
+  });
+  
   test('if .focus is true then .elem has class big',(){
     var day = new Day();
     day.day = 1;
