@@ -15,6 +15,7 @@ part 'src/buttons.dart';
 part 'src/calendar.dart';
 part 'src/controller.dart';
 part 'src/datepicker.dart';
+part 'src/day.dart';
 part 'src/login.dart';
 part 'src/model.dart';
 
