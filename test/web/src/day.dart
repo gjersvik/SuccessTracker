@@ -55,6 +55,12 @@ dayTest() => group('Day', (){
     expect(day.elem.text,startsWith('27: '));
   });
   
+  test('.focus dont work if day is 0',(){
+    day.day = 0;
+    day.focus = true;
+    expect(day.focus, isFalse);
+  });
+  
   test('if .focus is true then .elem has class big',(){
     day.day = 1;
     expect(day.elem.classes.contains('big'),isFalse);
