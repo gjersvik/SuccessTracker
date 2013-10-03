@@ -3,14 +3,14 @@ part of success_tacker;
 class Day{
   final Element elem = new Element.div();
   
+  int _day = 0;
+  bool _focus = false;
+  int successes = 0;
+  
   Day(){
     _setClass();
     _setText();
   }
-  
-  int _day = 0;
-  bool _focus = false;
-  int successes;
   
   int get day => _day;
   set day(int d){

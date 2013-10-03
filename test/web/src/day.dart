@@ -1,6 +1,22 @@
 part of success_tacker_test;
 
 dayTest() => group('Day', (){
+  Day day = null;
+  
+  setUp((){
+    day = new Day();
+  });
+  
+  tearDown((){
+    day = null;
+  });
+  
+  test('starts empty', (){
+    expect(day.day, 0, reason: 'Day.day is not 0');
+    expect(day.successes, 0, reason: 'Day.successes is not 0');
+    expect(day.focus, isFalse, reason: 'Day.focus is not false');
+  });
+  
   test('if .focus is true then .elem has class big',(){
     var day = new Day();
     day.day = 1;
