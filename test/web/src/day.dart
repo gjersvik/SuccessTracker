@@ -61,6 +61,14 @@ dayTest() => group('Day', (){
     expect(day.focus, isFalse);
   });
   
+  test('.focus returns the value set',(){
+    day.day = 1;
+    day.focus = true;
+    expect(day.focus, isTrue);
+    day.focus = false;
+    expect(day.focus, isFalse);
+  });
+  
   test('if .focus is true then .elem has class big',(){
     day.day = 1;
     expect(day.elem.classes.contains('big'),isFalse);
