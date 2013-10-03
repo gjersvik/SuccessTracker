@@ -13,6 +13,11 @@ class Day{
     }
     _day = d;
     elem.classes.toggle('day', d != 0);
+    elem.classes.toggle('empty', d == 0);
+    if(d == 0){
+      focus = false;
+    }
+    
     _setText(_day,'');
   }
   

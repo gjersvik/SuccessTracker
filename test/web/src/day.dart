@@ -21,4 +21,14 @@ dayTest() => group('Day', (){
     day.day = 27;
     expect(day.elem.classes.contains('day'), isTrue);
   });
+  
+
+  test('when .day is 0 class has only empty',(){
+    var day = new Day();
+    day.day = 27;
+    day.focus = true;
+    day.day = 0;
+    expect(day.elem.classes.contains('empty'), isTrue);
+    expect(day.elem.classes.length, 1);
+  });
 });
