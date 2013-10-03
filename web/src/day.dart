@@ -3,7 +3,13 @@ part of success_tacker;
 class Day{
   final Element elem = new Element.div();
   
+  Day(){
+    _setClass();
+    _setText();
+  }
+  
   int _day = 0;
+  bool _focus = false;
   int successes;
   
   int get day => _day;
@@ -15,14 +21,36 @@ class Day{
     elem.classes.toggle('day', d != 0);
     elem.classes.toggle('empty', d == 0);
     if(d == 0){
-      focus = false;
+      _focus = false;
     }
     
-    _setText(_day,'');
+    _setClass();
+    _setText();
   }
   
-  bool get focus => elem.classes.contains('big');
-  set focus(bool f) => elem.classes.toggle('big', f);
+  bool get focus => _focus;
+  set focus(bool f){
+    if(_focus == f){
+      return;
+    }
+    if(_day == 0){
+      return;
+    }
+    _focus = f;
+    _setClass();
+  }
   
-  _setText(day,succsess) => elem.text = '$day: succsess';
+  _setClass(){
+    elem.classes.toggle('day', _day != 0);
+    elem.classes.toggle('empty', _day == 0);
+    elem.classes.toggle('big', _focus);
+  }
+  
+  _setText(){
+    if(_day != 0){
+      elem.text = '$_day: ';
+    }else{
+      elem.text = '';
+    }
+  }
 }
