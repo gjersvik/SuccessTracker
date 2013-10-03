@@ -75,4 +75,11 @@ dayTest() => group('Day', (){
     day.focus = true;
     expect(day.elem.classes.contains('big'),isTrue);
   });
+  
+  test('.successes returns the value set',(){
+    day.successes = 1;
+    expect(day.successes, 1);
+    day.successes = 57;
+    expect(day.successes, 57);
+  });
 });
