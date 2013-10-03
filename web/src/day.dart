@@ -18,8 +18,6 @@ class Day{
       return;
     }
     _day = d;
-    elem.classes.toggle('day', d != 0);
-    elem.classes.toggle('empty', d == 0);
     if(d == 0){
       _focus = false;
     }
@@ -30,10 +28,7 @@ class Day{
   
   bool get focus => _focus;
   set focus(bool f){
-    if(_focus == f){
-      return;
-    }
-    if(_day == 0){
+    if(_focus == f || _day == 0){
       return;
     }
     _focus = f;
