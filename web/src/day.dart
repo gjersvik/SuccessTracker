@@ -5,5 +5,6 @@ class Day{
   
   int day;
   int successes;
-  bool focus;
+  bool get focus => elem.classes.contains('big');
+  set focus(bool f) => elem.classes.toggle('big', f);
 }
