@@ -23,20 +23,11 @@ dayTest() => group('Day', (){
     expect(day.elem.text, isEmpty);
   });
   
-  test('if .focus is true then .elem has class big',(){
-    day.day = 1;
-    expect(day.elem.classes.contains('big'),isFalse);
-    day.focus = true;
-    expect(day.elem.classes.contains('big'),isTrue);
+  test('.day returns the value set',(){
+    day.day = 27;
+    expect(day.day, 27);
   });
   
-  test('.elem.text starts wit .day and : .',(){
-    day.day = 1;
-    expect(day.elem.text,startsWith('1: '));
-    day.day = 27;
-    expect(day.elem.text,startsWith('27: '));
-  });
-
   test('when .day is not 0 class has day',(){
     day.day = 27;
     expect(day.elem.classes.contains('day'), isTrue);
@@ -55,5 +46,19 @@ dayTest() => group('Day', (){
     day.focus = true;
     day.day = 0;
     expect(day.elem.text, isEmpty);
+  });
+  
+  test('.elem.text starts wit .day and : .',(){
+    day.day = 1;
+    expect(day.elem.text,startsWith('1: '));
+    day.day = 27;
+    expect(day.elem.text,startsWith('27: '));
+  });
+  
+  test('if .focus is true then .elem has class big',(){
+    day.day = 1;
+    expect(day.elem.classes.contains('big'),isFalse);
+    day.focus = true;
+    expect(day.elem.classes.contains('big'),isTrue);
   });
 });
