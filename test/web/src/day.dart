@@ -83,11 +83,17 @@ dayTest() => group('Day', (){
     expect(day.successes, 57);
   });
   
-
-  
   test('.successes prints nummer of X to end off day.elem.text',(){
     day.day = 1;
     day.successes = 5;
     expect(day.elem.text,'1: XXXXX');
+  });
+  
+  test('.onClick gives day when .elem is clicked',(){
+    day.day = 1;
+    expect(day.onClick.first.then((int d){
+      expect(d, 1);
+    }),completes);
+    day.elem.click();
   });
 });

@@ -7,10 +7,18 @@ class Day{
   bool _focus = false;
   String _successes = '';
   
+  Stream<int> onClick;
+  
   Day(){
+    var trans = new StreamTransformer(handleData:(event, EventSink sink){
+      sink.add(_day);
+    });
+    onClick = trans.bind(elem.onClick);
+    
     _setClass();
     _setText();
   }
+  
   
   int get day => _day;
   set day(int d){
