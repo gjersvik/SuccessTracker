@@ -18,6 +18,7 @@ part 'src/datepicker.dart';
 part 'src/day.dart';
 part 'src/login.dart';
 part 'src/model.dart';
+part 'src/week.dart';
 
 main(){
   var controll = new Controller(const Config());
